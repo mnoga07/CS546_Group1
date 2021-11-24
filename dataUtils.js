@@ -18,7 +18,7 @@ function toObjectId(id) {
 function isValidName(name) {
     if(name.length !== 0 && name.trim().length === 0) 
         throw "Invalid username only with empty spaces";
-
+    
     var letterRegex = /^[a-zA-Z0-9_]{4,}$/;
     const valid = letterRegex.test(name);
     if(!valid) {
@@ -126,6 +126,7 @@ function userFieldChecker(params, update = false) {
     if(!update) {
         // check whether all params exist or not
         allParams.push('review_id');
+        allParams.push('reply_id');
         allParams.push('review_feedback');
         allParams.push('password');
     }
@@ -146,6 +147,7 @@ function userFieldChecker(params, update = false) {
     let strArray = ['favorites'];
     if(!update) {
         strArray.push('review_id');
+        strArray.push('reply_id');
     }
     for(let key of strArray) {
         if(!isArrayOfStr(params[key])) {
@@ -163,6 +165,23 @@ function userFieldChecker(params, update = false) {
     }
 }
 
+function managerFieldChecker(params) {
+    let allParams = ['userName', 'review_id', 'reply_id', 'password'];
+    for(let key of allParams) {
+        isFieldExistChecker(params[key], key);
+    }
+    let strArray = ['review_id', 'reply_id'];
+    
+    for(let key of strArray) {
+        if(!isArrayOfStr(params[key])) {
+            throw `${key} is not an array of string`;
+        }
+    }
+
+    isValidName(params.userName);
+    isValidPassword(params.password);
+}
+
 module.exports = {
     toObjectId,
     isValidName,
@@ -174,5 +193,6 @@ module.exports = {
     isStringParam,
     isArrayOfStr,
     isFieldExistChecker,
-    userFieldChecker
+    userFieldChecker,
+    managerFieldChecker,
 }

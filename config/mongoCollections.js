@@ -18,9 +18,9 @@ const getCollectionFn = (collection) => {
 module.exports = {
   users: getCollectionFn('users'),
   managers: getCollectionFn('managers'),
-  //restauarants: getCollectionFn('restauarants'),
-  //food_items: getCollectionFn('food_items'),
-  //reviews: getCollectionFn('reviews'),
-  //replies: getCollectionFn('replies'),
-  //orders_placed: getCollectionFn('orders_placed'),
+  restaurants: getCollectionFn('restaurants'),
+  food_items: getCollectionFn('food_items'),
+  reviews: getCollectionFn('reviews'),
+  replies: getCollectionFn('replies'),
+  orders_placed: getCollectionFn('orders_placed'),
 };

@@ -1,19 +1,19 @@
 const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.users;
-const { toObjectId, isValidName, isValidPassword, userFieldChecker } = require("./userUtils"); 
-const deep_equal = require('deep-equal');
+const { toObjectId, isValidName, isValidPassword, userFieldChecker } = require("../dataUtils"); 
 const bcrypt = require('bcrypt');
 const saltRounds = 16;
 
 module.exports = {
     async createUser(userName, streetAddress, city, state, zip, 
-        email, phone, favorites, review_id, review_feedback, password) {
+        email, phone, favorites, review_id, reply_id, review_feedback, password) {
         
         const newUser = { userName, streetAddress, city, state, zip, 
-            email, phone, favorites, review_id, review_feedback, password };
+            email, phone, favorites, review_id, reply_id, review_feedback, password };
         userFieldChecker(newUser, update = false);
         
-        newUser.userName = userName.toLowerCase();
+        userName = userName.toLowerCase();
+        newUser.userName = userName;
         const userCollection = await users();
         const user = await userCollection.findOne({userName: userName});
         if(user !== null) {

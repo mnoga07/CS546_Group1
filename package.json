@@ -18,8 +18,6 @@
   "homepage": "https://github.com/mnoga07/CS546_Group1#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "bcryptjs": "^2.4.3",
-    "deep-equal": "^2.0.5",
     "express": "^4.17.1",
     "express-handlebars": "^6.0.1",
     "express-session": "^1.17.2",
